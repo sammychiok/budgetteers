@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Budgeting App{% endblock %}</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+      body {
+        background-color: #74acec;
+      }
+      /* Updated title colors for better contrast */
+      h1, h2, h3, h4, h5, h6 {
+        color: #222;  /* Dark text for high contrast */
+        font-weight: bold;
+      }
+      .navbar-brand {
+        font-weight: bold;
+      }
+      .jumbotron {
+        background: url('https://via.placeholder.com/1500x300') no-repeat center center;
+        background-size: cover;
+        color: white;
+      }
+      .jumbotron h1 {
+        color: #ffffff;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+      }
+    </style>
+  </head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="{{ url_for('index') }}">Budgeting App</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" 
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('set_master_budget') }}">Master Budget</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('set_budget') }}">Set Budget</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('add_expense') }}">Add Expense</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('add_subscription') }}">Add Subscription</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Optional Jumbotron for a header -->
+  <div class="jumbotron jumbotron-fluid text-center">
+    <div class="container">
+      <h1 class="display-4">Welcome to Your Budgeting App</h1>
+      <p class="lead">Track budgets, expenses, and subscriptions with ease.</p>
+    </div>
+  </div>
+  
+  <div class="container mt-4">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-info" role="alert">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    
+    {% block content %}
+    {% endblock %}
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-light text-center py-3 mt-4">
+    <div class="container">
+      <span class="text-muted">&copy; 2025 Budgeting App. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

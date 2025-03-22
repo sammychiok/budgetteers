@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Set Master Budget{% endblock %}
+
+{% block content %}
+<h1>Set Master Budget</h1>
+<form action="{{ url_for('set_master_budget') }}" method="POST">
+  <div class="form-group">
+    <label for="total_budget">Total Budget:</label>
+    <input type="number" class="form-control" id="total_budget" name="total_budget" step="0.01"
+           value="{{ master_budget.total_budget if master_budget else '' }}" required>
+  </div>
+  <p>Note: Remaining budget will be calculated automatically based on your expenses.</p>
+  {% if master_budget %}
+    <p>Current remaining budget: <strong>{{ master_budget.remaining_budget }}</strong></p>
+  {% endif %}
+  <button type="submit" class="btn btn-primary">Set Master Budget</button>
+</form>
+{% endblock %}
